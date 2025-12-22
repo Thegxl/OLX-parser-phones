@@ -6,9 +6,9 @@ import telebot
 from telebot import types
 import threading
 from datetime import datetime, date
-
-# ================= НАСТРОЙКИ =================
-BOT_TOKEN = "8422144177:AAGbL1GHjC222JlvuJNVR2LzBD99hPCRUek"
+import os
+BOT_TOKEN = os.getenv("BOT_TOKEN") 
+ADMIN_ID = int(os.getenv("ADMIN_ID", "317720309"))
 CHAT_ID = 317720309
 OLX_URL = "https://www.olx.ua/uk/elektronika/telefony-i-aksesuary/mobilnye-telefony-smartfony/?min_id=910054918&reason=observed_search&search%5Border%5D=created_at%3Adesc&search%5Bprivate_business%5D=private"
 CHECK_INTERVAL = 65  
@@ -241,4 +241,5 @@ if __name__ == "__main__":
     ])
     print("Бот запущен...")
     threading.Thread(target=run_parser, daemon=True).start()
+
     bot.polling(none_stop=True)
