@@ -165,9 +165,10 @@ def profile_handler(message):
     status = "👑 <b>Премиум</b>" if u_data["is_premium"] else "🎁 <b>Бесплатный</b>"
     limit = "Безлимит" if u_data["is_premium"] else f"{30 - u_data['ads_today']} из 30"
     
-    text = (f"👤 <b>Ваш профиль</b>\n━━━━━━━━━━━━━━\n"
+    text = (
             f"🆔 ID: <code>{u_id}</code>\n"
             f"📊 Статус: {status}\n"
+            f"📉 Лимит на сегодня: {limit}\n━━━━━━━━━━━━━━\n"
             f"💳 Купить подписку /buy \n"
             f" Объявления приходят автоматически, не нужно нажимать на кнопку старт."
 )
@@ -258,4 +259,5 @@ if __name__ == "__main__":
     threading.Thread(target=run_parser, daemon=True).start()
 
     bot.polling(none_stop=True)
+
 
