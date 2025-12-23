@@ -158,7 +158,22 @@ def check_olx():
     except: pass
 
 # ---------- КОМАНДЫ ----------
-@bot.message_handler(commands=['start', 'me', 'profile'])
+@bot.message_handler(commands=['start'])
+def profile_handler(message):
+    u_id = message.chat.id
+    u_data = get_or_create_user(u_id)
+    status = "👑 <b>Премиум</b>" if u_data["is_premium"] else "🎁 <b>Бесплатный</b>"
+    limit = "Безлимит" if u_data["is_premium"] else f"{30 - u_data['ads_today']} из 30"
+    
+    text = (f"👤 <b>Ваш профиль</b>\n━━━━━━━━━━━━━━\n"
+            f"🆔 ID: <code>{u_id}</code>\n"
+            f"📊 Статус: {status}\n"
+            f"💳 Купить подписку /buy \n"
+            f" Объявления приходят автоматически, не нужно нажимать на кнопку старт."
+)
+    bot.send_message(u_id, text, parse_mode="HTML")
+
+@bot.message_handler(commands=['me', 'profile'])
 def profile_handler(message):
     u_id = message.chat.id
     u_data = get_or_create_user(u_id)
@@ -170,9 +185,9 @@ def profile_handler(message):
             f"📊 Статус: {status}\n"
             f"📉 Лимит на сегодня: {limit}\n━━━━━━━━━━━━━━\n"
             f"💳 Для покупки подписки нажмите /buy \n"
-            f" Объявления приходят автоматически, не нужно нажимать на кнопку старт."
 )
     bot.send_message(u_id, text, parse_mode="HTML")
+
 
 @bot.message_handler(commands=['buy'])
 def buy_cmd(message):
@@ -243,3 +258,4 @@ if __name__ == "__main__":
     threading.Thread(target=run_parser, daemon=True).start()
 
     bot.polling(none_stop=True)
+
