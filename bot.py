@@ -11,13 +11,13 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_ID = int(os.getenv("ADMIN_ID", "317720309"))
 CHAT_ID = 317720309
 OLX_URL = "https://www.olx.ua/uk/elektronika/telefony-i-aksesuary/mobilnye-telefony-smartfony/?min_id=910054918&reason=observed_search&search%5Border%5D=created_at%3Adesc&search%5Bprivate_business%5D=private"
-CHECK_INTERVAL = 65  
+CHECK_INTERVAL = 35  
 DB_NAME = "ads.db"
 FIRST_RUN = True 
 ADMIN_ID = 317720309
 MIN_PRICE = 500    
 MAX_PRICE = 15000    
-EXCLUDE_WORDS = ["обмен", "запчасти", "копия", "r-sim", "блокировка", "id", "рассрочка", "магазин"]
+EXCLUDE_WORDS = ["обмен", "запчасти", "копия", "r-sim", "блокировка", "id", "рассрочка", "магазин", "бронь", "не работает"]
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
 }
@@ -259,5 +259,6 @@ if __name__ == "__main__":
     threading.Thread(target=run_parser, daemon=True).start()
 
     bot.polling(none_stop=True)
+
 
 
